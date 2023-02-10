@@ -1,0 +1,10 @@
+SELECT * FROM `obat` WHERE 1;
+SELECT * FROM `obat`ORDER BY Kadaluarsa DESC;
+SELECT * FROM `obat` ORDER by Kadaluarsa ASC;
+SELECT * FROM `obat` WHERE Stok LIKE '200';
+SELECT * FROM `obat` WHERE Stok LIKE '150';
+SELECT * FROM `detail transaksi` WHERE 1;
+SELECT * FROM `pasien` WHERE 1;
+SELECT * FROM `transaksi` WHERE 1;
+SELECT * FROM `obat` GROUP BY stok;
+SELECT * FROM `obat` GROUP BY pembuat;
