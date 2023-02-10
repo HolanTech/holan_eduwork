@@ -1,0 +1,5 @@
+UPDATE `obat` SET `nama obat`='impus' WHERE 'ID obat' = '34567';
+UPDATE `obat` SET `nama obat`='kompres' WHERE 'ID obat' = '34568';
+UPDATE `obat` SET `Pembuat`='tempo'WHERE 'Id Obat'='34569'
+DELETE FROM `obat` WHERE 'id obat' ='34572';
+DELETE FROM `obat` WHERE 'id obat' ='34573';
