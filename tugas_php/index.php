@@ -37,8 +37,8 @@
     echo "<hr>";
 
 //Prisma Segitiga: panjang =a lebar =c dan tinggi =b
-    $d = ($a * $c / 2) / 2;
-    echo "($a*$c/2)/2=$d";
+    $d = ($a * $c / 2) *$b;
+    echo "($a*$c/2)*$b=$d";
     echo "<hr>";
 
 
