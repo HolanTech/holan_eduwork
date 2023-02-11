@@ -17,3 +17,4 @@ $name = "Holan";
     echo "Hallo ,$name . niali BMI anda adalah $bmi anda termasuk Obesitas";
   }
 ?>
+
