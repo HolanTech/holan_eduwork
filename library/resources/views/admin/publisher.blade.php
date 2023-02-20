@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('header','publisher')
+@section('header','Publisher')
 
 @section('content')
 ini adalah halaman publisher

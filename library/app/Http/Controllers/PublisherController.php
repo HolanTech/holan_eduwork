@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\publisher;
+use App\Models\Publisher;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PublisherController extends Controller
 {
@@ -19,66 +21,48 @@ class PublisherController extends Controller
 
     /**
      * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(): Response
     {
         //
     }
 
     /**
      * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         //
     }
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\publisher  $publisher
-     * @return \Illuminate\Http\Response
      */
-    public function show(publisher $publisher)
+    public function show(Publisher $publisher): Response
     {
         //
     }
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\publisher  $publisher
-     * @return \Illuminate\Http\Response
      */
-    public function edit(publisher $publisher)
+    public function edit(Publisher $publisher): Response
     {
         //
     }
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\publisher  $publisher
-     * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, publisher $publisher)
+    public function update(Request $request, Publisher $publisher): RedirectResponse
     {
         //
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\publisher  $publisher
-     * @return \Illuminate\Http\Response
      */
-    public function destroy(publisher $publisher)
+    public function destroy(Publisher $publisher): RedirectResponse
     {
         //
     }
