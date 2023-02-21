@@ -160,17 +160,17 @@
                     </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('catalog') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-server"></i>
+                            <a href="{{ url('books') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-book"></i>
                                 <p>
-                                    Catalog
+                                    Books
                                 </p>
                             </a>
                         </li>
-                    </ul>
+                    </ul>  
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('publisher') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
+                            <a href="{{ url('publishers') }}" class="nav-link {{ request()->is('publisher') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-users"></i>
                                 <p>
                                     Publishers
@@ -180,27 +180,27 @@
                     </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('author') }}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
+                            <a href="{{ url('authors') }}" class="nav-link {{ request()->is('author') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-user"></i>
                                 <p>
                                     Authors
                                 </p>
                             </a>
                         </li>
-                    </ul>
+                    </ul>    
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('book') }}" class="nav-link {{ request()->is('book') ? 'active' : '' }}">
-                                <i class="nav-icon fa fa-book"></i>
+                            <a href="{{ url('catalogs') }}" class="nav-link {{ request()->is('catalog') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-server"></i>
                                 <p>
-                                    Books
+                                    Catalog
                                 </p>
                             </a>
                         </li>
                     </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
-                            <a href="{{ url('member') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
+                            <a href="{{ url('members') }}" class="nav-link {{ request()->is('member') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-user-plus"></i>
                                 <p>
                                     Members

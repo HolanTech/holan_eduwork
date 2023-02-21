@@ -4,13 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Catalog;
 use Illuminate\Http\Request;
+use PhpParser\Node\Stmt\Catch_;
 
 class CatalogController extends Controller
 {
 
     public function index()
     {
-        return view('admin.catalog');
+        $catalogs = Catalog::with('books')->get();
+        // return $catalogs;
+        return view('admin.catalog', compact('catalogs'));
     }
 
     /**
