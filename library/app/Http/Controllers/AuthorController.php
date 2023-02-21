@@ -3,27 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Author;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use PhpParser\Node\Stmt\Catch_;
 
 class AuthorController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        return view('admin.author');
+        $authors = Author::with('books')->get();
+
+        return view('admin.author.index', compact('authors'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): Response
+    public function create()
     {
         //
     }
@@ -31,7 +27,7 @@ class AuthorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
         //
     }
@@ -39,7 +35,7 @@ class AuthorController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Author $author): Response
+    public function show(Author $author)
     {
         //
     }
@@ -47,7 +43,7 @@ class AuthorController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Author $author): Response
+    public function edit(Author $author)
     {
         //
     }
@@ -55,7 +51,7 @@ class AuthorController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Author $author): RedirectResponse
+    public function update(Request $request, Author $author)
     {
         //
     }
@@ -63,7 +59,7 @@ class AuthorController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Author $author): RedirectResponse
+    public function destroy(Author $author)
     {
         //
     }

@@ -1,32 +1,38 @@
 @extends('layouts.admin')
-@section('header','Catalog')
+@section('header','Author')
 @section('content')
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-11">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Data Catalog</h3>
+                            <a href="{{ url('authors/create') }}"class="btn btn-sm btn-primary pull-right">Create new Author</a>
                         </div>
 
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">No</th>
+                                        <th style="width: 10px">Id</th>
                                         <th class="text-center">Name</th>
-                                        <th class="text-center">Book Total</th>
+                                        <th class="text-center">E-mail</th>
+                                        <th class="text-center">Phone Number</th>
+                                        <th class="text-center">Adress</th>
                                         <th class="text-center">Created at</th>
-                                      
+                                       
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($catalogs as $key=> $catalog)
+                                    @foreach ($authors as $key => $author)
                                    
                                     <tr>
                                         <td>{{ $key+1 }}</td>
-                                        <td>{{ $catalog->name }}</td>
-                                        <td class="text-center">{{ count($catalog->books) }}</td>
-                                        <td class="text-center">{{ date('H:i:s-d/M/Y',strtotime($catalog->created_at)) }}  </td>
+                                        <td>{{ $author->name }}</td>
+                                        <td>{{ $author->email }}</td>
+                                        <td>{{ $author->phone_number }}</td>
+                                        <td>{{ $author->address }}</td>
+                                        <td class="text-center">{{ date('H:i:s-d/M/Y',strtotime($author->created_at)) }}  </td>
+                                        
+
                                     </tr>
                                   @endforeach
                                 </tbody>
