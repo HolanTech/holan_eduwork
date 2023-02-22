@@ -8,19 +8,19 @@ use PhpParser\Node\Stmt\Catch_;
 
 class PublisherController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
         $publishers = Publisher::with('books')->get();
 
-        return view('admin.publisher.index', compact('publishers'));
+        return view('admin.publisher', compact('publishers'));
     }
 
 
-    public function create()
-    {
-        return view('admin.publisher.create');
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -57,11 +57,7 @@ class PublisherController extends Controller
      * @param  \App\Models\Publisher  $publisher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Publisher $publisher)
-    {
 
-        return view('admin.publisher.edit', compact('publisher'));
-    }
 
     /**
      * Update the specified resource in storage.

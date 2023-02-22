@@ -12,7 +12,7 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th style="width: 10px">No</th>
+                                        <th style="width: 10px">ID</th>
                                         <th class="text-center">Name</th>
                                         <th class="text-center">Book Total</th>
                                         <th class="text-center">Created at</th>

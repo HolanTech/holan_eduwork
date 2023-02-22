@@ -8,6 +8,10 @@ use PhpParser\Node\Stmt\Catch_;
 
 class CatalogController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function index()
     {
