@@ -26,28 +26,10 @@
                                         <th>E-mail</th>
                                         <th>Phone Number</th>
                                         <th>Adress</th>
-                                        <th>Created at</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    @foreach ($publishers as $key => $publisher)
-                                   
-                                    <tr>
-                                        <td class="text-center">{{ $key+1 }}</td>
-                                        <td>{{ $publisher->name }}</td>
-                                        <td>{{ $publisher->email }}</td>
-                                        <td class="text-center">{{ $publisher->phone_number }}</td>
-                                        <td>{{ $publisher->address }}</td>
-                                        <td class="text-center">{{ date('H:i:s-d/M/Y',strtotime($publisher->created_at)) }}  </td>
-                                        <td>
-                                            <a href="#" @click="editData({{ $publisher }})"   class="btn btn-warning btn-sm ">Edit</a>
-                                            <a href="#" @click="deleteData({{ $publisher->id }})" class="btn btn-danger btn-sm ">Delete</a>
-                                        </td>
-                                        </form>              
-                                    </tr>
-                                  @endforeach
-                                </tbody>
+                            
                             </table>
                         </div>
 
@@ -78,15 +60,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Email</label>
-                                    <input type="text" class="form-control" name="email" :value="data.email" required>
+                                    <input type="email" class="form-control" name="email" :value="data.email" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Phone Number</label>
-                                    <input type="text" class="form-control" name="phone_number" :value="data.phone_number" required>
+                                    <input type="number" class="form-control" name="phone_number" :value="data.phone_number" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Address</label>
-                                    <input type="text" class="form-control" name="address" :value="data.address" required>
+                                    <input type="string" class="form-control" name="address" :value="data.address" required>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">
@@ -104,56 +86,98 @@
         </div>
 @endsection
 @section('js')
- <!-- DataTables  & Plugins -->
-<script src="{{ asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-bs4/js')}}/dataTables.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js')}}/dataTables.responsive.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-responsive/js')}}/responsive.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-buttons/js')}}/dataTables.buttons.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-buttons/js')}}/buttons.bootstrap4.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/js')}}zip/js')}}zip.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-buttons/js')}}/buttons.html5.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-buttons/js')}}/buttons.print.min.js')}}"></script>
-<script src="{{ asset('assets/plugins/datatables-buttons/js')}}/buttons.colVis.min.js')}}"></script>
-
+<!-- DataTables  & Plugins -->
+<script src="{{asset('assets/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+<script src="{{asset('assets/plugins/jszip/jszip.min.js')}}"></script>
+<script src="{{asset('assets/plugins/pdfmake/pdfmake.min.js')}}"></script>
+<script src="{{asset('assets/plugins/pdfmake/vfs_fonts.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+<script src="{{asset('assets/plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <script type="text/javascript">
-        var controller = new Vue({
-            el: '#controller',
-            data: {
-                data : {},
-                actionUrl : '{{ url('publishers') }}',
-                editStatus : false
-            },
-            mounted: function() {
+     var actionUrl = "{{ url('publishers') }}";
+    var actionapi = "{{ url('api/publishers') }}";
 
+    var columns = [
+        
+        { data: 'DT_RowIndex', class: 'text-center', orderable: true },
+        { data: 'name', class: 'text-left', orderable: true },
+        { data: 'email', class: 'text-left', orderable: false},
+        { data: 'phone_number', class: 'text-center', orderable: false },
+        { data: 'address', class: 'text-left', orderable: false },
+        {
+            render: function (index, row, data, meta) {
+                return `
+                    <a href="#" class="btn btn-warning btn-sm" onclick="controller.editData(event, ${meta.row})">Edit</a>
+                    <a class="btn btn-danger btn-sm" onclick="controller.deleteData(event,${data.id})">Delete</a>
+                `;
             },
-            methods: {
-                addData() {
-                    this.data = {};
-                    this.actionUrl = '{{ url('publishers') }}';
-                    this.editStatus = false ;
-                    $('#modal-default').modal();
+            orderable: false,width: '200px', class: 'text-center' },
+    ];
+    var controller = new Vue({
+    el: '#controller',
+    data: {
+        datas: [],
+        data: {},
+        actionUrl: actionUrl,
+        apiUrl: actionapi,
+        editStatus: false
+    },
+    mounted: function () {
+        this.datatable();
+    },
+    methods: {
+        datatable: function () {
+            var _this = this;
+            _this.table = $('#datatable').DataTable({
+                ajax: {
+                    url: _this.apiUrl,
+                    type: 'GET'
                 },
-                editData(data) {
-                    this.data = data;
-                    this.actionUrl = '{{ url('publishers') }}' + '/' + data.id;
-                    this.editStatus = true ;
-                    $('#modal-default').modal();
-                },
-                deleteData(id) {
-                    this.actionUrl = '{{ url('publishers') }}' + '/' + id;
-                    if(confirm("Are you sure ?")){
-                        axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
-                            location.reload();
-                        }); 
-                    }
+                columns: columns
+            }).on('xhr', function () {
+                _this.datas = _this.table.ajax.json().data;
+            });
+            },
+            addData() {
+                this.data = {};
+                this.actionUrl = '{{ url('publishers') }}';
+                this.editStatus = false ;
+                $('#modal-default').modal();
+            },
+            editData(event, row) {
+                this.data = this.datas[row];
+                this.editStatus = true ;
+                $('#modal-default').modal();
+            },
+            deleteData(event, id) {
+                if(confirm("Are you sure ?")){
+                    $(event.target).parents('tr').remove();
+                    axios.post(this.actionUrl+'/'+id, {_method: 'DELETE'}).then(response => {
+                        alert('Data has been remove');
+                    }); 
                 }
+            },
+            submitForm(event, id) {
+                event.preventDefault();
+                const _this = this;
+                var actionUrl = ! this.editStatus ? this.actionUrl : this.actionUrl+'/'+id;
+                axios.post(actionUrl, new FormData($(event.target)[0])).then(response => 
+                   {$('#modal-default').modal('hide');
+                 _this.table.ajax.reload();
+                })
+
             }
-        });
-    </script>
-    <!-- Page specific script -->
+
+    }
+});
+</script>
+
 <script>
     $(function () {
       $("#datatable").DataTable();
