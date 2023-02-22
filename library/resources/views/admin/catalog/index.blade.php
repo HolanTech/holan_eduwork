@@ -2,7 +2,7 @@
 @section('header','Catalog')
 @section('content')
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-7">
                     <div class="card">
                         <div class="card-header">
                             <a href="{{ url('catalogs/create') }}"class="btn btn-sm btn-primary pull-right">Create new catalog</a>
