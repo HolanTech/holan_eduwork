@@ -27,6 +27,7 @@
                                         <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>Address</th>
+                                        <th>Created At</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -111,6 +112,7 @@
         { data: 'email', class: 'text-left', orderable: false},
         { data: 'phone_number', class: 'text-center', orderable: false },
         { data: 'address', class: 'text-left', orderable: false },
+        { data: 'date', class: 'text-center', orderable: false },
         {
             render: function (index, row, data, meta) {
                 return `
