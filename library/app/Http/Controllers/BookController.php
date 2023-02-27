@@ -13,9 +13,9 @@ class BookController extends Controller
     public function api()
     {
         $books = Book::all();
-        $datatables = datatables()->of($books)->addIndexColumn();
+        // $datatables = datatables()->of($books)->addIndexColumn();
 
-        return $datatables->make(true);
+        // return $datatables->make(true);
         return json_encode($books);
     }
 
@@ -30,9 +30,10 @@ class BookController extends Controller
      */
     public function index()
     {
-        $publishers = publisher::all();
+        $publishers = Publisher::all();
         $authors = Author::all();
         $catalogs = Catalog::all();
+        $books = Book::all();
         return view('admin.book', compact('publishers', 'authors', 'catalogs'));
     }
 
@@ -43,9 +44,11 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $catalogs = Catalog::all();
+        return view('admin.create_book', compact('publishers', 'authors', 'catalogs'));
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -67,7 +70,7 @@ class BookController extends Controller
 
         Book::create($request->all());
 
-        return redirect('book');
+        return redirect('books')->with('success', 'Book added successfully');
     }
 
     /**
@@ -89,7 +92,10 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        $publishers = Publisher::all();
+        $authors = Author::all();
+        $catalogs = Catalog::all();
+        return view('admin.edit_book', compact('book', 'publishers', 'authors', 'catalogs'));
     }
 
     /**
@@ -115,7 +121,7 @@ class BookController extends Controller
 
         $book->update($request->all());
 
-        return redirect('book');
+        return redirect('books')->with('success', 'Book updated successfully');
     }
 
     /**

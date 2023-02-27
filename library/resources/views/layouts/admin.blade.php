@@ -198,6 +198,16 @@
                     </ul>
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                         <li class="nav-item">
+                            <a href="{{url('transactions') }}" class="nav-link {{ request()->is('transactions') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-file"></i>
+                                <p>
+                                    Transactions
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item">
                             <a href="{{ url('members') }}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
                                 <i class="nav-icon fa fa-user-plus"></i>
                                 <p>

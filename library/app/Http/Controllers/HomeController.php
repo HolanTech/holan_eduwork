@@ -34,9 +34,9 @@ class HomeController extends Controller
 
         $books = Book::count();
         $members = Member::count();
-        $authors = Author::count();
         $publishers = Publisher::count();
-        $transactions = Transaction::whereMonth('date_start', 'date_end')->count();
+        $transactions = Transaction::count();
+        $authors = Author::count();
 
         $data_donut = Book::select(DB::raw("COUNT(publisher_id) as total"))->groupBy('publisher_id')->orderBy('publisher_id', 'asc')->pluck('total');
         $label_donut = Publisher::orderBy('publishers.id', 'asc')->join('books', 'books.publisher_id', '=', 'publishers.id')->groupBy('name')->pluck('name');
@@ -64,6 +64,6 @@ class HomeController extends Controller
         }
 
 
-        return view('home', compact('books', 'members', 'publishers', 'transactions', 'data_donut', 'label_donut', 'data_pie', 'label_pie', 'data_bar'));
+        return view('home', compact('books', 'members', 'publishers', 'transactions', 'authors', 'data_donut', 'label_donut', 'data_pie', 'label_pie', 'data_bar'));
     }
 }

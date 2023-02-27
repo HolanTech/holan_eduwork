@@ -11,17 +11,17 @@ class Book extends Model
 
     protected $fillable = ['isbn', 'title', 'year', 'publisher_id', 'author_id', 'catalog_id', 'qty', 'price'];
 
-    public function Author()
+    public function authors()
     {
         return $this->belongsTo('App\Models\Author', 'author_id');
     }
 
-    public function Publisher()
+    public function publishers()
     {
         return $this->belongsTo('App\Models\publisher', 'publisher_id');
     }
 
-    public function Catalog()
+    public function catalogs()
     {
         return $this->belongsTo('App\Models\Catalog', 'catalog_id');
     }

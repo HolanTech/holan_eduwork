@@ -1,15 +1,17 @@
 @extends('layouts.admin')
-@section('header','Dashboard')
+@section('header','Home')
 
 @section('content')
-  {{-- <div class="content">
+  <section class="content">
     <div class="container-fluid">
-      <!-- Small boxes (Stat box) --> --}}
+      <!-- Small boxes (Stat box) -->
         <div class="row">
             <div class="col-lg-3 col-6">
+              <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3>{{ $books }}</h3>
+
                   <p>Books</p>
                 </div>
                 <div class="icon">
@@ -18,10 +20,13 @@
                 <a href="{{ url('books') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
             <div class="col-lg-3 col-6">
+              <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
                   <h3>{{ $members }}</h3>
+
                   <p>Members</p>
                 </div>
                 <div class="icon">
@@ -30,23 +35,29 @@
                 <a href="{{ url('members') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
             <div class="col-lg-3 col-6">
+              <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
                   <h3>{{ $publishers }}</h3>
-                  <p>Publishers</p>
+
+                  <p>Authors</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="{{ url('publishers') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="{{ url('authors') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
+            <!-- ./col -->
             <div class="col-lg-3 col-6">
+              <!-- small box -->
               <div class="small-box bg-danger">
                 <div class="inner">
                   <h3>{{ $transactions }}</h3>
-                  <p>Transactions</p>
+
+                  <p>Transaction</p>
                 </div>
                 <div class="icon">
                   <i class="ion ion-pie-graph"></i>
@@ -54,16 +65,18 @@
                 <a href="{{ url('transactions') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
-      
-          </div>
-          </div>
-
-    {{-- </div>
-</div> --}}
-{{-- <section class="content">
-  <div class="container-fluid"> --}}
+          <!-- ./col -->
+        </div>
+    </div>
+</section>
+<section class="content">
+  <div class="container-fluid">
     <div class="row">
+
+
       <div class="col-md-6">
+       
+
         <!-- DONUT CHART -->
         <div class="card card-danger">
           <div class="card-header">
@@ -84,10 +97,15 @@
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
+
+       
+
       </div>
       <!-- /.col (LEFT) -->
       
       <div class="col-md-6">
+        
+
         <!-- BAR CHART -->
         <div class="card card-success">
           <div class="card-header">
@@ -107,45 +125,71 @@
               <canvas id="barChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
             </div>
           </div>
-        </div>
-      </div>
           <!-- /.card-body -->
         </div>
         <!-- /.card -->
-        <div class="col-md-6">
-          <div class="card card-danger">
-            <div class="card-header">
-              <h3 class="card-title">Pie Chart</h3>
-  
-              <div class="card-tools">
-                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                  <i class="fas fa-minus"></i>
-                </button>
-                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                  <i class="fas fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="card-body">
-              <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          <!-- /.card -->
-        </div>
+
        
 
       </div>
       <!-- /.col (RIGHT) -->
     </div>
+    {{-- <div class="row">
+      <div class="col-md-6">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Authors</h3>
 
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div> --}}
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-danger">
+          <div class="card-header">
+            <h3 class="card-title">Pie Chart</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                <i class="fas fa-minus"></i>
+              </button>
+              <button type="button" class="btn btn-tool" data-card-widget="remove">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="card-body">
+            <canvas id="pieChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+    </div>
     <!-- /.row -->
-  {{-- </div><!-- /.container-fluid -->
-</section> --}}
+  </div><!-- /.container-fluid -->
+</section>
 @endsection
 
+<!-- jQuery -->
 <script src="{{  asset('assets/plugins/jquery/jquery.min.js')  }}"></script>
+<!-- ChartJS -->
 <script src="{{  asset('assets/plugins/chart.js/Chart.min.js')  }}"></script>
+
 
 <script type="text/javascript">
 
@@ -156,6 +200,10 @@ var label_pie = '{!! json_encode($label_pie) !!}';
 var data_pie = '{!! json_encode($data_pie) !!}';
 
 $(function () {
+    /* ChartJS
+     * -------
+     * Here we will create a few charts using ChartJS
+     */
 
     //-------------
     //- DONUT CHART -
@@ -167,7 +215,7 @@ $(function () {
       datasets: [
         {
           data: JSON.parse(data_donut),
-          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#4B0082','#00FF00','#FF0000'],
+          backgroundColor : ['#f56954', '#00a65a', '#f39c12', '#00c0ef', '#3c8dbc', '#4B0082','#00FF00','#FF0000','##FF0000','#FF4874'],
         }
       ]
     }
@@ -228,7 +276,7 @@ $(function () {
         }
       ]
     };
-    var pieOptions     = {
+    var pieChartOptions     = {
       maintainAspectRatio : false,
       responsive : true,
     }
@@ -237,11 +285,9 @@ $(function () {
     new Chart(pieChartCanvas, {
       type: 'pie',
       data: pieData,
-      options: pieOptions
+      options: pieChartOptions
     })
 
-    //-------------
 
-    
 
 </script>

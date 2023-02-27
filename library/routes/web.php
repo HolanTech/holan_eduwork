@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,9 @@ Route::resource('/publishers', App\Http\Controllers\PublisherController::class);
 Route::resource('/authors', App\Http\Controllers\AuthorController::class);
 Route::resource('/members', App\Http\Controllers\MemberController::class);
 Route::resource('/books', App\Http\Controllers\BookController::class);
+Route::resource('/transactions', App\Http\Controllers\TransactionController::class);
 
+// Route::get('/transactions', [TransactionController::class, 'index']);
 Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']);
 Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
 Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);

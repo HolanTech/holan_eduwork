@@ -19,7 +19,7 @@
         <hr>
 
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-xs-12" v-for="book in filteredList":key="book.id">
+            <div class="col-md-3 col-sm-6 col-xs-12" v-for="book in filteredList">
                 <div class="info-box" v-on:click="editData(book)">
                     <div class="info-box-content">
                         <span class="info-box-text h3">@{{ book.title }} ( @{{ book.qty }})</span>
@@ -107,8 +107,8 @@
 
 @section('js')
 <script type="text/javascript">
-    var actionUrl = '{{ url('book') }}';
-    var apiUrl = '{{ url('api/book') }}';
+    var actionUrl = '{{ url('books') }}';
+    var apiUrl = '{{ url('api/books') }}';
 
     var app = new Vue ({
         el: '#controller',
@@ -139,18 +139,18 @@
             },
             addData() {
                 this.book = {};
-                this.actionUrl = '{{ url('book') }}';
+                this.actionUrl = '{{ url('books') }}';
                 this.editStatus = false;
                 $('#modal-default').modal();
             },
             editData(book) {
                 this.book = book;
-                this.actionUrl = '{{ url('book') }}'+'/'+this.book.id;
+                this.actionUrl = '{{ url('books') }}'+'/'+this.book.id;
                 this.editStatus = true;
                 $('#modal-default').modal();
             },
             deleteData(id) {
-                this.actionUrl = '{{ url('book') }}' + '/' +id;
+                this.actionUrl = '{{ url('books') }}' + '/' +id;
                 if(confirm("Are you sure ?")){
                         axios.post(this.actionUrl, {_method: 'DELETE'}).then(response => {
                             location.reload();
