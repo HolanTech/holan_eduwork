@@ -18,8 +18,11 @@ class AuthorController extends Controller
      */
     public function index()
     {
-
-        return view('admin.author');
+        if (auth()->user()->can('edit page')) {
+            return view('admin.author');
+        } else {
+            abort('403');
+        }
     }
 
     public function api()

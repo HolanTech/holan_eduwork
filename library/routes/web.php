@@ -36,3 +36,4 @@ Route::get('/api/authors', [App\Http\Controllers\AuthorController::class, 'api']
 Route::get('/api/publishers', [App\Http\Controllers\PublisherController::class, 'api']);
 Route::get('/api/members', [App\Http\Controllers\MemberController::class, 'api']);
 Route::get('/api/books', [App\Http\Controllers\BookController::class, 'api']);
+Route::get('/spatie/home', [App\Http\Controllers\HomeController::class, 'spatie']);

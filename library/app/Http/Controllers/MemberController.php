@@ -23,13 +23,17 @@ class MemberController extends Controller
     }
     public function api()
     {
-        $members = Member::all();
-        $datatables = datatables()->of($members)
-            ->addColumn('date', function ($member) {
-                return convert_date($member->created_at);
-            })->addIndexColumn();
+        if (auth()->user()->can('edit page')) {
+            $members = Member::all();
+            $datatables = datatables()->of($members)
+                ->addColumn('date', function ($member) {
+                    return convert_date($member->created_at);
+                })->addIndexColumn();
 
-        return $datatables->make(true);
+            return $datatables->make(true);
+        } else {
+            abort('403');
+        }
     }
     /**
      * Show the form for creating a new resource.

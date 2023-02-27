@@ -15,7 +15,11 @@ class PublisherController extends Controller
 
     public function index()
     {
-        return view('admin.publisher');
+        if (auth()->user()->can('edit page')) {
+            return view('admin.publisher');
+        } else {
+            abort('403');
+        }
     }
 
     public function api()

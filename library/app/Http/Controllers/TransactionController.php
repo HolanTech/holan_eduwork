@@ -11,7 +11,11 @@ class TransactionController extends Controller
      */
     public function index()
     {
-        return view('admin.transaction');
+        if (auth()->user()->can('edit page')) {
+            return view('admin.transaction');
+        } else {
+            abort('403');
+        }
     }
 
     /**

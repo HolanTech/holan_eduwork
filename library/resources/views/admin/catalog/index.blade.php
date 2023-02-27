@@ -1,6 +1,8 @@
 @extends('layouts.admin')
 @section('header','Catalog')
 @section('content')
+  
+@role('admin')
             <div class="row">
                 <div class="col-md-7">
                     <div class="card">
@@ -46,6 +48,6 @@
                 </div>
 
             </div>
-    
+@endrole  
 
 @endsection

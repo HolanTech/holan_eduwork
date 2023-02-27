@@ -15,9 +15,13 @@ class CatalogController extends Controller
 
     public function index()
     {
-        $catalogs = Catalog::with('books')->get();
+        if (auth()->user()->can('edit page')) {
+            $catalogs = Catalog::with('books')->get();
 
-        return view('admin.catalog.index', compact('catalogs'));
+            return view('admin.catalog.index', compact('catalogs'));
+        } else {
+            abort('403');
+        }
     }
 
 

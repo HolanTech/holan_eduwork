@@ -30,11 +30,15 @@ class BookController extends Controller
      */
     public function index()
     {
-        $publishers = Publisher::all();
-        $authors = Author::all();
-        $catalogs = Catalog::all();
-        $books = Book::all();
-        return view('admin.book', compact('publishers', 'authors', 'catalogs'));
+        if (auth()->user()->can('edit page')) {
+            $publishers = Publisher::all();
+            $authors = Author::all();
+            $catalogs = Catalog::all();
+            $books = Book::all();
+            return view('admin.book', compact('publishers', 'authors', 'catalogs'));
+        } else {
+            abort('403');
+        }
     }
 
     /**
