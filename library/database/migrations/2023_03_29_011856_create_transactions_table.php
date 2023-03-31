@@ -8,15 +8,17 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
-
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('member_id');
             $table->date('date_start');
             $table->date('date_end');
+            $table->boolean('status');
             $table->timestamps();
 
             $table->foreign('member_id')->references('id')->on('members');
@@ -25,8 +27,10 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('transactions');
     }

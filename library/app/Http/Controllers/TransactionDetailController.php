@@ -3,65 +3,88 @@
 namespace App\Http\Controllers;
 
 use App\Models\TransactionDetail;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class TransactionDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): Response
-    {
-        //
-    }
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $transaction_details = TransactionDetail::with('book')->get();
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create(): Response
-    {
-        //
-    }
+    // return $transaction_details;
+    return view('admin.transactionDetail.index', compact('transaction_details'));
+  }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request): RedirectResponse
-    {
-        //
-    }
+  /**
+   * Show the form for creating a new resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function create()
+  {
+    //
+  }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(TransactionDetail $transactionDetail): Response
-    {
-        //
-    }
+  /**
+   * Store a newly created resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @return \Illuminate\Http\Response
+   */
+  public function store(Request $request)
+  {
+    //
+  }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(TransactionDetail $transactionDetail): Response
-    {
-        //
-    }
+  /**
+   * Display the specified resource.
+   *
+   * @param  \App\Models\TransactionDetail  $transactionDetail
+   * @return \Illuminate\Http\Response
+   */
+  public function show(TransactionDetail $transactionDetail)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, TransactionDetail $transactionDetail): RedirectResponse
-    {
-        //
-    }
+  /**
+   * Show the form for editing the specified resource.
+   *
+   * @param  \App\Models\TransactionDetail  $transactionDetail
+   * @return \Illuminate\Http\Response
+   */
+  public function edit(TransactionDetail $transactionDetail)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(TransactionDetail $transactionDetail): RedirectResponse
-    {
-        //
-    }
+  /**
+   * Update the specified resource in storage.
+   *
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Models\TransactionDetail  $transactionDetail
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, TransactionDetail $transactionDetail)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified resource from storage.
+   *
+   * @param  \App\Models\TransactionDetail  $transactionDetail
+   * @return \Illuminate\Http\Response
+   */
+  public function destroy(TransactionDetail $transactionDetail)
+  {
+    $transactionDetail->delete();
+
+    return redirect('transactionDetail');
+  }
 }

@@ -41,9 +41,7 @@ class CatalogController extends Controller
         $this->validate($request, [
             'name' => ['required']
         ]);
-        // $catalog = new Catalog;
-        // $catalog->name = $request->name;
-        // $catalog->save();
+
         Catalog::create($request->all());
         return redirect('catalogs');
     }

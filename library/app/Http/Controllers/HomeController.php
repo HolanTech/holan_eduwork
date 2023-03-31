@@ -73,18 +73,18 @@ class HomeController extends Controller
         }
     }
 
-    // // public function spatie()
-    // {
-    //     //     $role = Role::create(['name' => 'admin']);
-    //     //     $permission = Permission::create(['name' => 'edit page']);
+    public function spatie()
+    {
+        // $role = Role::create(['name' => 'admin']);
+        // $permission = Permission::create(['name' => 'edit page']);
 
-    //     //     $role->givePermissionTo($permission);
-    //     //     $permission->assignRole($role);
-    //     // }
+        // $role->givePermissionTo($permission);
+        // $permission->assignRole($role);
 
-    //     // $user = auth()->user();
-    //     // $user->assignRole('admin');
-    //     $user = User::with('roles')->get();
-    //     return $user;
-    // }
+
+        // $user = auth()->user();
+        // $user->assignRole('admin');
+        // $user = User::with('roles')->get();
+        // return $user;
+    }
 }

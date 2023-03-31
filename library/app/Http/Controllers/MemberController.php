@@ -16,24 +16,27 @@ class MemberController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-
-        return view('admin.member');
-    }
-    public function api()
+    public function index(Request $request)
     {
         if (auth()->user()->can('edit page')) {
-            $members = Member::all();
-            $datatables = datatables()->of($members)
-                ->addColumn('date', function ($member) {
-                    return convert_date($member->created_at);
-                })->addIndexColumn();
-
-            return $datatables->make(true);
+            return view('admin.member');
         } else {
             abort('403');
         }
+    }
+    public function api(Request $request)
+    {
+        if ($request->gender) {
+            $datas = Member::where('gender', $request->gender)->get();
+        } else {
+            $datas = Member::all();
+        }
+        $datatables = datatables()->of($datas)
+            ->addColumn('date', function ($datas) {
+                return convert_date($datas->created_at);
+            })->addIndexColumn();
+
+        return $datatables->make(true);
     }
     /**
      * Show the form for creating a new resource.
