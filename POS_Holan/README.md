@@ -1,10 +1,8 @@
-<p align="center">
-    <a href="https://github.com/sandinur157" target="_blank"><img src="https://raw.githubusercontent.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales/main/public/img/logo.png" width="120"></a>
-</p>
+
 
 ## Tentang Aplikasi
 
-Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v8.* dan minimal PHP v7.4 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support.
+Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola transaksi pada sebuah toko atau oleh kasir. Aplikasi ini dibuat menggunakan Laravel v10.* dan minimal PHP v7.4 jadi apabila pada saat proses instalasi atau penggunaan terdapat error atau bug kemungkinan karena versi dari PHP yang tidak support.
 
 ### Beberapa Fitur yang tersedia:
 - Manajemen Kategori Produk
@@ -35,11 +33,9 @@ Aplikasi POS atau point of sales adalah aplikasi yang digunakan untuk mengelola 
 ## Instalasi
 #### Via Git
 ```bash
-git clone https://github.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales.git
+git clone https://github.com/HolanTech/holan_eduwork.git
 ```
 
-### Download ZIP
-[Link](https://github.com/sandinur157/tuturial-membuat-aplikasi-point-of-sales/archive/refs/heads/main.zip)
 
 ### Setup Aplikasi
 Jalankan perintah 
@@ -59,13 +55,13 @@ Konfigurasi file .env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=example_app
+DB_DATABASE=mystore
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 Opsional
 ```bash
-APP_NAME=Laravel
+APP_NAME=MyStore
 APP_ENV=local
 APP_KEY=base64:QGRW4K7UVzS2M5HE2ZCLlUuiCtOIzRSfb38iWApkphE=
 APP_DEBUG=true
@@ -87,11 +83,6 @@ Menjalankan aplikasi
 ```bash
 php artisan serve
 ```
-
-## Link Tutorial
-
-- [Youtube](https://www.youtube.com/playlist?list=PLaN75JfoGz0Okf9f_7GbGM5IFaLXWx-_C)
-- [W2Learn](https://www.w2learn.com)
 
 ## License
 
