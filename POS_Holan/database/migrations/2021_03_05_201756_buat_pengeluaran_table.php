@@ -17,6 +17,7 @@ class BuatPengeluaranTable extends Migration
             $table->increments('id_pengeluaran');
             $table->text('deskripsi');
             $table->integer('nominal');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

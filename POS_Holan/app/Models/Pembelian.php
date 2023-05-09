@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Pembelian extends Model
 {
@@ -17,4 +18,5 @@ class Pembelian extends Model
     {
         return $this->belongsTo(Supplier::class, 'id_supplier', 'id_supplier');
     }
+    use SoftDeletes;
 }

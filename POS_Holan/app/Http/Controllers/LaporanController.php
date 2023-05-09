@@ -79,7 +79,7 @@ class LaporanController extends Controller
         $data = $this->getData($awal, $akhir);
         $pdf  = PDF::loadView('laporan.pdf', compact('awal', 'akhir', 'data'));
         $pdf->setPaper('a4', 'portrait');
-
+        ini_set('max_execution_time', 120);
         return $pdf->download('Laporan-pendapatan-' . date('Y-m-d-his') . '.pdf');
     }
 }

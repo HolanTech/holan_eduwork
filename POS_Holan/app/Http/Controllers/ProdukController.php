@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Kategori;
-use Illuminate\Http\Request;
-use App\Models\Produk;
 use PDF;
+use App\Models\Produk;
+use App\Models\Kategori;
+use App\Models\Penjualan;
+use Illuminate\Http\Request;
+use App\Models\PenjualanDetail;
 
 class ProdukController extends Controller
 {
@@ -33,11 +35,11 @@ class ProdukController extends Controller
             ->addIndexColumn()
             ->addColumn('select_all', function ($produk) {
                 return '
-                    <input type="checkbox" name="id_produk[]" value="'. $produk->id_produk .'">
+                    <input type="checkbox" name="id_produk[]" value="' . $produk->id_produk . '">
                 ';
             })
             ->addColumn('kode_produk', function ($produk) {
-                return '<span class="label label-success">'. $produk->kode_produk .'</span>';
+                return '<span class="label label-success">' . $produk->kode_produk . '</span>';
             })
             ->addColumn('harga_beli', function ($produk) {
                 return format_uang($produk->harga_beli);
@@ -51,8 +53,8 @@ class ProdukController extends Controller
             ->addColumn('aksi', function ($produk) {
                 return '
                 <div class="btn-group">
-                    <button type="button" onclick="editForm(`'. route('produk.update', $produk->id_produk) .'`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
-                    <button type="button" onclick="deleteData(`'. route('produk.destroy', $produk->id_produk) .'`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                    <button type="button" onclick="editForm(`' . route('produk.update', $produk->id_produk) . '`)" class="btn btn-xs btn-info btn-flat"><i class="fa fa-pencil"></i></button>
+                    <button type="button" onclick="deleteData(`' . route('produk.destroy', $produk->id_produk) . '`)" class="btn btn-xs btn-danger btn-flat"><i class="fa fa-trash"></i></button>
                 </div>
                 ';
             })
@@ -79,7 +81,7 @@ class ProdukController extends Controller
     public function store(Request $request)
     {
         $produk = Produk::latest()->first() ?? new Produk();
-        $request['kode_produk'] = 'P'. tambah_nol_didepan((int)$produk->id_produk +1, 6);
+        $request['kode_produk'] = 'P' . tambah_nol_didepan((int)$produk->id_produk + 1, 6);
 
         $produk = Produk::create($request->all());
 
@@ -134,10 +136,28 @@ class ProdukController extends Controller
     public function destroy($id)
     {
         $produk = Produk::find($id);
-        $produk->delete();
 
-        return response(null, 204);
+        // Cek apakah stok produk kosong
+        if ($produk->stok == 0) {
+
+            $penjualan_detail = PenjualanDetail::where('id_produk', $id)->exists();
+
+
+
+            // Jika tidak ada penjualan detail atau penjualan open yang menggunakan produk ini, maka hapus produk
+            if (!$penjualan_detail) {
+                $produk->delete();
+                return response()->json('Produk berhasil dihapus', 200);
+            } else {
+                return response()->json('Produk gagal dihapus karena masih digunakan dalam penjualan', 422);
+            }
+        } else {
+            return response()->json('Produk gagal dihapus karena masih memiliki stok', 422);
+        }
     }
+
+
+
 
     public function deleteSelected(Request $request)
     {

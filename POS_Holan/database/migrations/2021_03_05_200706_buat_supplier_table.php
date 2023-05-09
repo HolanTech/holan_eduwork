@@ -18,6 +18,7 @@ class BuatSupplierTable extends Migration
             $table->string('nama');
             $table->text('alamat')->nullable();
             $table->string('telepon');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

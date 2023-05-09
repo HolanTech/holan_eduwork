@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Penjualan;
-use App\Models\PenjualanDetail;
+use PDF;
 use App\Models\Produk;
 use App\Models\Setting;
+use App\Models\Penjualan;
 use Illuminate\Http\Request;
-use PDF;
+use App\Models\PenjualanDetail;
+use Illuminate\Support\Facades\DB;
 
 class PenjualanController extends Controller
 {
@@ -74,29 +75,64 @@ class PenjualanController extends Controller
         return redirect()->route('transaksi.index');
     }
 
+
+
     public function store(Request $request)
     {
-        $penjualan = Penjualan::findOrFail($request->id_penjualan);
-        $penjualan->id_member = $request->id_member;
-        $penjualan->total_item = $request->total_item;
-        $penjualan->total_harga = $request->total;
-        $penjualan->diskon = $request->diskon;
-        $penjualan->bayar = $request->bayar;
-        $penjualan->diterima = $request->diterima;
-        $penjualan->update();
+        // Memulai transaksi database
+        DB::beginTransaction();
 
-        $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
-        foreach ($detail as $item) {
-            $item->diskon = $request->diskon;
-            $item->update();
+        try {
+            $penjualan = Penjualan::find($request->id_penjualan);
+            if (!$penjualan) {
+                $penjualan = new Penjualan;
+            }
 
-            $produk = Produk::find($item->id_produk);
-            $produk->stok -= $item->jumlah;
-            $produk->update();
+            $penjualan->id_member = $request->id_member;
+            $penjualan->total_item = $request->total_item;
+            $penjualan->total_harga = $request->total;
+            $penjualan->diskon = $request->diskon;
+            $penjualan->bayar = $request->bayar;
+            $penjualan->diterima = $request->diterima;
+            $penjualan->id_user = auth()->user()->id;
+
+            $penjualan->save();
+
+            $detail = PenjualanDetail::where('id_penjualan', $penjualan->id_penjualan)->get();
+            foreach ($detail as $item) {
+                $item->diskon = $request->diskon;
+                $item->save();
+
+                $produk = Produk::find($item->id_produk);
+
+                // cek apakah stok produk cukup untuk melakukan penjualan
+                if ($produk->stok > $item->jumlah) {
+                    $produk->stok -= $item->jumlah;
+                    $produk->save();
+                } elseif ($produk->stok == $item->jumlah) {
+                    $produk->stok = 0;
+                    $produk->save();
+                } else {
+                    // Jika stok kurang, batalkan transaksi dan kembali dengan pesan kesalahan
+                    DB::rollBack();
+                    return back()->withErrors(['error' => 'Stok ' . $produk->nama_produk . ' tidak cukup']);
+                }
+                session()->flash('success', 'Produk ' . $produk->nama_produk . ' berhasil dijual.');
+            }
+
+            // Jika tidak ada kesalahan, commit transaksi ke database
+            DB::commit();
+        } catch (\Exception $e) {
+            // Jika terjadi kesalahan, batalkan transaksi dan kembali dengan pesan kesalahan
+            DB::rollBack();
+            return back()->withErrors(['error' => 'Terjadi kesalahan saat melakukan transaksi']);
         }
 
         return redirect()->route('transaksi.selesai');
     }
+
+
+
 
     public function show($id)
     {

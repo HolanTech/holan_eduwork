@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Produk extends Model
 {
@@ -12,4 +13,5 @@ class Produk extends Model
     protected $table = 'produk';
     protected $primaryKey = 'id_produk';
     protected $guarded = [];
+    use SoftDeletes;
 }

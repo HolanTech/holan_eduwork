@@ -20,6 +20,7 @@ class BuatPembelianTable extends Migration
             $table->integer('total_harga');
             $table->tinyInteger('diskon')->default(0);
             $table->integer('bayar')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

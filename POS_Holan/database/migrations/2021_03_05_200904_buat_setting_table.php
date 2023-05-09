@@ -19,6 +19,8 @@ class BuatSettingTable extends Migration
             $table->text('alamat')->nullable();
             $table->string('telepon');
             $table->tinyInteger('tipe_nota');
+            $table->smallInteger('diskon')
+                ->default(0);
             $table->string('path_logo');
             $table->string('path_kartu_member');
             $table->timestamps();
